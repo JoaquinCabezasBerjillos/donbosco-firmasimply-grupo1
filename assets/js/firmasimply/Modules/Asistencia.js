@@ -9,8 +9,9 @@ const TOKEN = JSON.parse(localStorage.getItem('token'));
 export default class Asistencia {
     /**
      * Devuelve el listado de firmas
-     * @returns
+     *  @returns
      */
+    
     static async getlistadoFirmas() {
         return await listadoFirmas(TOKEN);
     }
