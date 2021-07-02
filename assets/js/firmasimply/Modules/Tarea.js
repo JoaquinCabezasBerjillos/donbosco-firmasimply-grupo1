@@ -24,16 +24,17 @@ export default class Tarea {
      * @returns
      */
     static async crearTarea(tarea) {
+        
         return await crearTarea(TOKEN, tarea);
-        let tarea = {
-            titulo: 'Tarea nueva',
-            descripcion: 'Lorem Ipsum',
-            estado: 0, // 0 pendiente, 1 completada
-            user_id: Auth.getCoder().id, // esta funcion devuelve el id del coder logeado
-            categoria_id: 1,
-        };
+    //     let tarea1 = {
+    //         titulo: 'Tarea nueva',
+    //         descripcion: 'Lorem Ipsum',
+    //         estado: 0, // 0 pendiente, 1 completada
+    //         user_id: Auth.getCoder().id, // esta funcion devuelve el id del coder logeado
+    //         categoria_id: 1,
+    //     };
     
-     Tarea.crearTarea(tarea);
+    //  Tarea.crearTarea(tarea1);
     }
 
     /**
@@ -59,7 +60,7 @@ export default class Tarea {
         return await marcarTarea(TOKEN, data, tareaId);
     
     let idTarea = 2;
-let data = { estado: 1 }; // 1 completada, 0 pendiente
-Tarea.marcarTarea(data, idTarea);
+let data1 = { estado: 1 }; // 1 completada, 0 pendiente
+Tarea.marcarTarea(data1, idTarea);
 }
 }

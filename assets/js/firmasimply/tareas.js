@@ -1,7 +1,17 @@
-
-// import Auth from './Modules/Auth/Auth.js';
-// import tarea from './Modules/Tarea.js';
+import Auth from './Modules/Auth/Auth.js';
+  import Tareas from './Modules/Tarea.js';
 // import Categoria from './Modules/Categoria.js';
+async function getListadoTareas(){
+  let res = await Tareas.getListadoTareas();
+  console.log(res);
+  var arrayData = res;
+      todoList.innerHTML = '';
+      for (let i = 0; i < arrayData.length; i++) {
+          todoList.innerHTML += '<li>' + arrayData[i].name + '</li>';
+      }
+}
+getListadoTareas();
+
 class Tarea {
     constructor(nombre, categoria, descripcion) {
       this.nombre = nombre;
@@ -22,7 +32,7 @@ class Tarea {
       const list = document.querySelector('#tarea-list');
   
       const row = document.createElement('tr');
-  
+
       row.innerHTML = `
         <td>${tarea.nombre}</td>
         <td>${tarea.categoria}</td>
@@ -94,36 +104,36 @@ class Tarea {
   
   // Event: Display Tareas
   document.addEventListener('DOMContentLoaded', UI.displayTareas);
-  
+  console.log(1);
   // Event: Add a Tarea
   document.querySelector('#tarea-form').addEventListener('submit', (e) => {
-    // Prevent actual submit
     e.preventDefault();
+
   
     // Get form values
-    const nombre = document.querySelector('#nombre').value;
+    const titulo = document.querySelector('#nombre').value;
     const categoria = document.querySelector('#categoria').value;
     const descripcion = document.querySelector('#descripcion').value;
-  
-    // Validate
-    if(nombre === '' || categoria === '' || descripcion === '') {
-      UI.showAlert('Please fill in all fields', 'danger');
-    } else {
+    Tareas.crearTarea({titulo,categoria,descripcion, user_id: 2, categoria_id: 1});
+    // // Validate
+    // if(nombre === '' || categoria === '' || descripcion === '') {
+    //   UI.showAlert('Please fill in all fields', 'danger');
+    // } else {
     
-      const tarea = new Tarea(nombre, categoria, descripcion)
+    //   const tarea = new Tarea(nombre, categoria, descripcion)
   
-      // Add Tarea to UI
-      UI.addTareaToList(tarea)
+    //   // Add Tarea to UI
+    //   UI.addTareaToList(tarea)
   
-      // Add book to store
-     Store.addTarea(tarea);
+    //   // Add book to store
+    //  Store.addTarea(tarea);
   
-      // Show success message
-     UI.showAlert('Tarea Added', 'success');
+    //   // Show success message
+    //  UI.showAlert('Tarea Added', 'success');
   
-      // Clear fields
-      UI.clearFields();
-    }
+    //   // Clear fields
+    //   UI.clearFields();
+    // }
   });
   
   // Event: Remove a Tarea
@@ -137,5 +147,3 @@ class Tarea {
     // Show success message
     UI.showAlert('Tarea Removed', 'success');
   });
-
-

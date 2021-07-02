@@ -3,10 +3,10 @@ import Asistencia from './Modules/Asistencia.js';
 import Tarea from './Modules/Tarea.js';
 import Pildora from './Modules/Pildora.js';
 
-getListadoFirmas();
+
 async function getListadoFirmas() {
     let respuesta = await Asistencia.getlistadoFirmas();
-    console.log(respuesta);
+    //console.log(respuesta);
     // Tu Código
 }
 

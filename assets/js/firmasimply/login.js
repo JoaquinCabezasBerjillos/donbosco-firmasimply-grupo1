@@ -2,6 +2,8 @@ import Auth from './Modules/Auth/Auth.js';
 
 const DASHBOARD_URL = '/index.html';
 
+
+
 const loginForm = document.querySelector('#loginform');
 
 loginForm.addEventListener('submit', login, false);
