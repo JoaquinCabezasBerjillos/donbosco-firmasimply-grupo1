@@ -13,7 +13,9 @@ export default class Asistencia {
      */
     
     static async getlistadoFirmas() {
+        Asistencia.getlistadoFirmas();
         return await listadoFirmas(TOKEN);
+        
     }
 
     /**
@@ -26,6 +28,12 @@ export default class Asistencia {
      * @returns
      */
     static firmar(firma) {
+        let firma = {
+            user_id: Auth.getCoder().id,
+            nota: 'texto test',
+            estado: 1 // 1 para entrada, 0 para salida
+        };
+        Asistencia.firmar(firma);
         return firmar(TOKEN, firma)
     }
 
@@ -35,6 +43,7 @@ export default class Asistencia {
      * @returns
      */
     static getNumFirmasHoy() {
+        Asistencia.getNumFirmasHoy();
         return getNumFirmasHoy(TOKEN);
     }
 }
