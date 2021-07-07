@@ -1,19 +1,47 @@
-// import Auth from './Modules/Auth/Auth.js';
-// import Pildora from './Modules/Pildora.js';
+import Auth from './Modules/Auth/Auth.js';
+import Pildora from './Modules/Pildora.js';
 
 async function getListadoPildoras() {
-    //
-}
+    let res = await Pildoras.getListadoPildoras();
 
-// Pildora Class: Represents a Pildora
-class Pildora {
-	constructor(nombre, descripcion, fecha_presentacion) {
-		this.nombre = nombre
-		this.descripcion = descripcion
-		this.fecha_presentacion = fecha_presentacion
+	var arrayData = res;
+	for (let i = 0; i < arrayData.length; i++){
+		console.log(arrayData[i]);
+		const list = document.querySelector('#pildora-list');
+
+		const row = document.createElement('tr');
+
+		row.innerHTML=`
+		<td>${arrayData[i].nombre}</td>
+		<td>${arrayData[i].descripcion}</td>
+		<td>${arrayData[i].fecha_presentacion}</td>
+		<td>${arrayData[i].estado}</td>
+		<td>${arrayData[i].created_at}</td>
+		<td><a href="#" id="${arrayData[i].id}" class="btn btn-danger btn-sm delete">X</a></td>
+	   `
+	   list.appendChild(row);
 	}
 }
 
+// Pildora Class: Represents a Pildora
+getListadoTareas();
+
+class Pildora {
+	constructor(nombre, descripcion, fecha_presentacion) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.fecha_presentacion = fecha_presentacion;
+	}
+}
+class UI {
+	static displayTareas() {
+		const tareas = Store.getTareas();
+
+		tareas.forEach((tarea) => UI.)
+	}
+
+
+}
 class Store {
 	static addPildora(pildora) {
         const pildoras = Store.getPildoras();
@@ -81,6 +109,8 @@ class UI {
     <td>${pildora.nombre}</td>
     <td>${pildora.descripcion}</td>
     <td>${pildora.fecha_presentacion}</td>
+	<td></td>
+	<td></td>
     <td><a href="#" class="btn btn-danger btn-sm delete">X</a></td>
     `
 
