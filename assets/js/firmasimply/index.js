@@ -10,34 +10,30 @@ import Pildora from './Modules/Pildora.js';
 // Funcionalidad de Firmar
 let firmaEntrada = document.getElementById("entrada")
 
-firmaEntrada.addEventListener("click", async (e) => {
+firmaEntrada.addEventListener("click"), async (e) => {
     e.preventDefault()
 
     let firma = {
         user_id: Auth.getCoder().id,
         nota: 'texto test',
         estado: 1 // 1 para entrada, 0 para salida
-  
-};
-await Asistencia.firmar(firma);
+
+    }
+    await Asistencia.firmar(firma);
 
 
-// Consultar listado Firmas
-
-async function listadoFirmas() {
+    // Consultar listado Firmas
     let listadoFirmas = await Asistencia.getlistadoFirmas();
-
-    // Pasarlo de javascript al html     
     let lista = document.getElementById('lista_firmas')
     let comentario = document.getElementById("anotacion").value
     lista.innerHTML += `<li> ${listadoFirmas[0].created_at + " " + "anotacion: " + nota} </li>`;
 
-
 }
-//Firmar  salida
-let firmaSalida = document.getElementById("salida")
 
-firmaSalidas.addEventListener("click", async (e) => {
+//Firmar  salida
+let firmaSalida = document.getElementById("salida");
+
+firmaSalidas.addEventListener("click"), async (e) => {
     e.preventDefault()
     let firma = {
         user_id: Auth.getCoder().id,
@@ -45,8 +41,13 @@ firmaSalidas.addEventListener("click", async (e) => {
         estado: 0
     }
 };
-
 await Asistencia.firmar(firma);
+
+async function getNumFirmasHoy() {
+    
+    Asistencia.getNumFirmasHoy();
+}
+
 
 // Consultar listado Píldoras
 
@@ -62,4 +63,4 @@ async function listadoPildoras() {
 
 async function listadoTareas() {
     let listadoTareas = await Asistencia.getlistadoTareas();
-}
+};
