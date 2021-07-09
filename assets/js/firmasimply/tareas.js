@@ -1,6 +1,6 @@
 import Auth from './Modules/Auth/Auth.js';
 import Tareas from './Modules/Tarea.js';
-import Categoria from './Modules/Categoria.js';
+// import Categoria from './Modules/Categoria.js';
 
 async function getListadoTareas() {
   let res = await Tareas.getListadoTareas();
@@ -13,7 +13,7 @@ async function getListadoTareas() {
     const row = document.createElement('tr');
 
     row.innerHTML = `
-          <td>${arrayData[i].nombre}</td>
+          <td>${arrayData[i].titulo}</td>
           <td>${arrayData[i].categoria}</td>
           <td>${arrayData[i].descripcion}</td>
           <td>${arrayData[i].estado}</td>
@@ -24,21 +24,31 @@ async function getListadoTareas() {
 
     list.appendChild(row);
 
-//     categoria_id: 1
-// created_at: "2021-07-02T12:49:00.000000Z"
-// descripcion: "asdasd"
-// estado: 0
-// id: 26
-// nombre: "sadasdas"
-// updated_at: "2021-07-02T12:49:00.000000Z"
-// user_id: 2
    }
  }
+
+//  let btnAgregar = document.getElementById("agregar")
+// btnAgregar.addEventListener("click", async function subirTarea(e){
+// e.preventDefault()
+
+// let tarea = {
+// 	titulo: document.getElementById('titulo').value,
+// 	categoria: document.getElementById('categoria').value,
+//   descripcion: document.getElementById('descripcion').value,
+// 	estado: 0, // 0 pendiente, 1 presentada
+// 	user_id: Auth.getCoder().id, // esta funcion devuelve el id del coder logeado
+// };
+// console.log(tarea)
+// Tareas.crearTarea(tarea);
+// })
+
+Tareas.getListadoTareas();
 getListadoTareas();
 
+
 class Tarea {
-  constructor(nombre, categoria_id, descripcion) {
-    this.nombre = nombre;
+  constructor(titulo, categoria_id, descripcion) {
+    this.titulo = titulo;
     this.categoria_id = categoria_id;
     this.descripcion = descripcion;
   }
@@ -58,7 +68,7 @@ class UI {
     const row = document.createElement('tr');
 
     row.innerHTML = `
-        <td>${tarea.nombre}</td>
+        <td>${tarea.titulo}</td>
         <td>${tarea.categoria_id}</td>
         <td>${tarea.descripcion}</td>
         <td></td>
@@ -88,7 +98,7 @@ class UI {
   // }
 
   static clearFields() {
-    document.querySelector('#nombre').value = '';
+    document.querySelector('#titulo').value = '';
     document.querySelector('#categoria_id').value = '';
     document.querySelector('#descripcion').value = '';
   }
@@ -126,7 +136,7 @@ class Store {
   }
 }
 
-// Event: Display Tareas
+// Event: Display Tareas 
 document.addEventListener('DOMContentLoaded', UI.displayTareas);
 console.log(1);
 // Event: Add a Tarea
@@ -135,16 +145,16 @@ document.querySelector('#tarea-form').addEventListener('submit', (e) => {
 
 
   // Get form values
-  const nombre = document.querySelector('#nombre').value;
+  const titulo = document.querySelector('#nombre').value;
   const categoria_id = document.querySelector('#categoria').value;
   const descripcion = document.querySelector('#descripcion').value;
-  Tareas.crearTarea({ nombre, categoria_id, descripcion, user_id: 2, categoria_id: 1 });
+  Tareas.crearTarea({ titulo, categoria_id, descripcion, user_id: 2, categoria_id: 1, estado: 0});
   // // Validate
-  if(nombre === '' || categoria_id === '' || descripcion === '') {
+  if(titulo === '' || categoria_id === '' || descripcion === '') {
     UI.showAlert('Please fill in all fields', 'danger');
   } else {
 
-    const tarea = new Tarea(nombre, categoria_id, descripcion)
+    const tarea = new Tarea(titulo, categoria_id, descripcion)
 
     // Add Tarea to UI
     UI.addTareaToList(tarea)
