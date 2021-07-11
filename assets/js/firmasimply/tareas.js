@@ -1,6 +1,7 @@
 import Auth from './Modules/Auth/Auth.js';
 import Tareas from './Modules/Tarea.js';
 // import Categoria from './Modules/Categoria.js';
+const list = document.querySelector('#tarea-list');
 
 async function getListadoTareas() {
   let res = await Tareas.getListadoTareas();
@@ -9,7 +10,7 @@ async function getListadoTareas() {
   var arrayData = res;
   for (let i = 0; i < arrayData.length; i++) {
     console.log(arrayData[i]);
-    const list = document.querySelector('#tarea-list');
+
 
     const row = document.createElement('tr');
 
@@ -25,44 +26,56 @@ async function getListadoTareas() {
 
     list.appendChild(row);
 
-   }
- }
+  }
+}
 
-//  let btnAgregar = document.getElementById("borrar")
-// btnBorrar.addEventListener("click", async function borrarTarea(e){
-// e.preventDefault()
-// console.log(e)
+let btnAgregar = document.getElementById("agregar")
+btnAgregar.addEventListener("click", async function subirTarea(e) {
+  e.preventDefault()
 
 
-// 
 
-// let tarea = {//
-// 	titulo: document.getElementById('titulo').value,
-// 	categoria: document.getElementById('categoria').value,
-//   descripcion: document.getElementById('descripcion').value,
-// 	estado: 0, // 0 pendiente, 1 presentada
-// 	user_id: Auth.getCoder().id, // esta funcion devuelve el id del coder logeado
-// };
-// console.log(tarea)
-// Tareas.crearTarea(tarea);
-// })
+
+
+  let tarea = {
+    titulo: document.getElementById('titulo').value,
+    categoria: document.getElementById('categoria').value,
+    descripcion: document.getElementById('descripcion').value,
+    estado: 0, // 0 pendiente, 1 presentada
+    user_id: Auth.getCoder().id, // esta funcion devuelve el id del coder logeado
+  };
+  console.log(tarea)
+  Tareas.crearTarea(tarea);
+})
 
 Tareas.getListadoTareas();
 getListadoTareas();
 
+list.addEventListener("click", async function borrarTarea(e) {
+  e.preventDefault()
+  console.log(e)
+  console.log(e.target)
+  if (e.target.classList.contains('delete')) {
+    // we clicked the X icon
+    // target.parentElement.parentElement.remove()
+    console.log(e.target.id)
+    Tareas.borrarTarea(e.target.id);
+  }
+})
+
 
 class Tarea {
-  constructor(titulo, categoria_id, descripcion) {
+  constructor(titulo, categoria, descripcion) {
     this.titulo = titulo;
-    this.categoria_id = categoria_id;
+    this.categoria = categoria;
     this.descripcion = descripcion;
   }
 }
 
 // UI Class: Handle UI Tasks
 class UI {
-  static displayTareas() {
-    const tareas = Store.getTareas();
+  static displayTarea() {
+    // const tareas = Store.getTareas();
 
     tareas.forEach((tarea) => UI.addTareaToList(tarea));
   }
@@ -74,7 +87,7 @@ class UI {
 
     row.innerHTML = `
         <td>${tarea.titulo}</td>
-        <td>${tarea.categoria_id}</td>
+        <td>${tarea.categoria}</td>
         <td>${tarea.descripcion}</td>
         <td></td>
         <td></td>
@@ -104,42 +117,42 @@ class UI {
 
   static clearFields() {
     document.querySelector('#titulo').value = '';
-    document.querySelector('#categoria_id').value = '';
+    document.querySelector('#categoria').value = '';
     document.querySelector('#descripcion').value = '';
   }
 }
 
 // Store Class: Handles Storage
-class Store {
-  static getTareas() {
-    let tareas;
-    if (localStorage.getItem('tareas') === null) {
-      tareas = [];
-    } else {
-      tareas = JSON.parse(localStorage.getItem('tareas'));
-    }
+// class Store {
+//   static getTareas() {
+//     let tareas;
+//     if (localStorage.getItem('tareas') === null) {
+//       tareas = [];
+//     } else {
+//       tareas = JSON.parse(localStorage.getItem('tareas'));
+//     }
 
-    return tareas;
-  }
+//     return tareas;
+//   }
 
-  static addTarea(tarea) {
-    const tareas = Store.getTareas();
-    tareas.push(tarea);
-    localStorage.setItem('tareas', JSON.stringify(tareas));
-  }
+//   static addTarea(tarea) {
+//     const tareas = Store.getTareas();
+//     tareas.push(tarea);
+//     localStorage.setItem('tareas', JSON.stringify(tareas));
+//   }
 
-  static removeTarea(tarea) {
-    const tareas = Store.getTareas();
+//   static removeTarea(tarea) {
+//     const tareas = Store.getTareas();
 
-    tareas.forEach((tarea, index) => {
-      if (tarea.descripcion === descripcion) {
-        tarea.splice(index, 1);
-      }
-    });
+//     tareas.forEach((tarea, index) => {
+//       if (tarea.descripcion === descripcion) {
+//         tarea.splice(index, 1);
+//       }
+//     });
 
-    localStorage.setItem('tareas', JSON.stringify(tareas));
-  }
-}
+// localStorage.setItem('tareas', JSON.stringify(tareas));
+//   }
+// }
 
 // Event: Display Tareas 
 document.addEventListener('DOMContentLoaded', UI.displayTareas);
@@ -151,25 +164,25 @@ document.querySelector('#tarea-form').addEventListener('submit', (e) => {
 
   // Get form values
   const titulo = document.querySelector('#nombre').value;
-  const categoria_id = document.querySelector('#categoria').value;
+  const categoria = document.querySelector('#categoria').value;
   const descripcion = document.querySelector('#descripcion').value;
-  Tareas.crearTarea({ titulo, categoria_id, descripcion, user_id: 2, categoria_id: 1, estado: 0});
+  Tareas.crearTarea({ titulo, categoria, descripcion, user_id: 2, categoria: 1, estado: 0 });
   // // Validate
-  if(titulo === '' || categoria_id === '' || descripcion === '') {
+  if (titulo === '' || categoria === '' || descripcion === '') {
     UI.showAlert('Please fill in all fields', 'danger');
   } else {
 
-    const tarea = new Tarea(titulo, categoria_id, descripcion)
+    const tarea = new Tarea(titulo, categoria, descripcion)
 
     // Add Tarea to UI
     UI.addTareaToList(tarea)
 
     // Add Tarea to store
-   Store.addTarea(tarea);
+    //  Store.addTarea(tarea);
 
     // Show success message
-  //  UI.showAlert('Tarea Added', 'success');
-  UI.showAlert('Tarea borrada','success')
+    //  UI.showAlert('Tarea Added', 'success');
+    // UI.showAlert('Tarea borrada','success')
 
     // Clear fields
     UI.clearFields();
@@ -182,7 +195,7 @@ document.querySelector('#tarea-list').addEventListener('click', (e) => {
   UI.deleteTarea(e.target);
 
   // Remove Tarea from store
-  Store.removeTarea(e.target.parentElement.previousElementSibling.textContent);
+  // Store.removeTarea(e.target.parentElement.previousElementSibling.textContent);
 
   // Show success message
   // UI.showAlert('Tarea Removed', 'success');

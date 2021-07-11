@@ -58,8 +58,8 @@ export default class Tarea {
     static async marcarTarea(data, tareaId) {
         return await marcarTarea(TOKEN, data, tareaId);
     
-    let idTarea = 2;
-//let data = { estado: 1 }; // 1 completada, 0 pendiente
-Tarea.marcarTarea(data, idTarea);
-}
-}
+//     let idTarea = 2;
+// //let data = { estado: 1 }; // 1 completada, 0 pendiente
+// Tarea.marcarTarea(data, idTarea);
+ }
+ }
