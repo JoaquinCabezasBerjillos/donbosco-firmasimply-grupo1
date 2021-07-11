@@ -1,0 +1,26 @@
+#entrada {
+    background-color: green;
+    width: 40vh;
+    height: 5vh;
+    border-radius: 10px;
+    margin: auto;
+    color: white;
+    font-size: 3vh;
+   
+
+}
+#salida {
+    background-color: red;
+    width: 40vh;
+    height: 5vh;
+    border-radius: 10px;
+    margin: auto;
+    color: white;
+    font-size: 3vh;
+    margin-top: 2vh;
+}
+.anotaciones {    
+    padding: 10px;
+   
+}
+

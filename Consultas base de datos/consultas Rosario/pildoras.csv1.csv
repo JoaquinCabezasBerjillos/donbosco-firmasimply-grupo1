@@ -1,0 +1,3 @@
+id;nombre;descripcion;fecha_presentacion;estado;user_id;create_at;updated_at
+1;perro;pelo largo;13/07/2021;0;2;02/07/2021 15:23;07/07/2021 15:22
+2;gato;sin pelo;15/07/2021;0;2;02/07/2021 15:23;02/07/2021 15:22

@@ -36,6 +36,7 @@ let pildora = {
 console.log(pildora)
 Pildoras.crearPildora(pildora);
 })
+
 // Pildora Class: Represents a Pildora
 Pildoras.getListadoPildoras();
 getListadoPildoras();
@@ -60,6 +61,7 @@ class Pildora {
 		this.fecha_presentacion = fecha_presentacion;
 	}
 }
+
 class UI {
 	static displayPildoras() {
 		// const pildoras = Store.getPildoras();
