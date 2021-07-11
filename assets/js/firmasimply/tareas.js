@@ -28,13 +28,14 @@ async function getListadoTareas() {
    }
  }
 
- let btnAgregar = document.getElementById("borrar")
-btnBorrar.addEventListener("click", async function borrarTarea(e){
-e.preventDefault()
-console.log(e)
+//  let btnAgregar = document.getElementById("borrar")
+// btnBorrar.addEventListener("click", async function borrarTarea(e){
+// e.preventDefault()
+// console.log(e)
 
 
-})
+// 
+
 // let tarea = {//
 // 	titulo: document.getElementById('titulo').value,
 // 	categoria: document.getElementById('categoria').value,
