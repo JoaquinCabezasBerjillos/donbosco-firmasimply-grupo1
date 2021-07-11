@@ -4,6 +4,9 @@ import Tareas from './Modules/Tarea.js';
 
 async function getListadoTareas() {
   let res = await Tareas.getListadoTareas();
+  console.log(res);
+}
+
 
   var arrayData = res;
   for (let i = 0; i < arrayData.length; i++) {
@@ -25,13 +28,16 @@ async function getListadoTareas() {
     list.appendChild(row);
 
    }
- }
+ 
 
-//  let btnAgregar = document.getElementById("agregar")
-// btnAgregar.addEventListener("click", async function subirTarea(e){
-// e.preventDefault()
+ let btnAgregar = document.getElementById("borrar")
+btnBorrar.addEventListener("click", async function borrarTarea(e){
+e.preventDefault()
+console.log(e)
 
-// let tarea = {
+
+})
+// let tarea = {//
 // 	titulo: document.getElementById('titulo').value,
 // 	categoria: document.getElementById('categoria').value,
 //   descripcion: document.getElementById('descripcion').value,
@@ -42,7 +48,7 @@ async function getListadoTareas() {
 // Tareas.crearTarea(tarea);
 // })
 
-Tareas.getListadoTareas();
+// Tareas.getListadoTareas();
 getListadoTareas();
 
 
@@ -164,21 +170,22 @@ document.querySelector('#tarea-form').addEventListener('submit', (e) => {
 
     // Show success message
   //  UI.showAlert('Tarea Added', 'success');
-  UI.showAlert('Tarea borrada','success')
+  UI.showAlert('Tarea Added','success')
 
     // Clear fields
-    UI.clearFields();
+    UI.clearFields()
   }
-});
+
 
 // Event: Remove a Tarea
-document.querySelector('#tarea-list').addEventListener('click', (e) => {
+document.getElementById('tarea-list').addEventListener('click',handleRemove)
+function handleRemove(e)  {
   // Remove Tarea from UI
   UI.deleteTarea(e.target);
+  UI.showAlert('Tarea Remove', 'success')
 
   // Remove Tarea from store
-  Store.removeTarea(e.target.parentElement.previousElementSibling.textContent);
+  Store.removeTarea(e.target.parentElement.previousElementSibling.textContent)
 
-  // Show success message
-  // UI.showAlert('Tarea Removed', 'success');
-});
+
+}
